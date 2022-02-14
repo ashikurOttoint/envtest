@@ -1,13 +1,4 @@
-FROM node:8-alpine
-
-WORKDIR /usr/app
-
-COPY package.json .
-
-RUN npm i --quiet
-
-COPY . .
-
-RUN npm install pm2 -g
-
-CMD ["pm2-runtime", "server.js"]
+FROM nginx:latest
+COPY ./index.html /usr/share/nginx/html/index.html
+WORKDIR /usr/share/nginx/html
+RUN date +%x_%H:%M:%S:%N >> ./index.html
